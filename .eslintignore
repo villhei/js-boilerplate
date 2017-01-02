@@ -1,0 +1,8 @@
+client/public/
+node_modules/
+apidoc/
+coverage/
+.idea/
+.git/
+server/test/mock-data/
+flow-typed/

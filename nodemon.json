@@ -1,0 +1,7 @@
+{
+  "ignore": ["client/public"],
+  "events": {
+    "restart": ""
+  },
+  "ext": "js styl"
+}

@@ -1,0 +1,8 @@
+.DS_Store
+npm-debug.log
+.idea/
+node_modules/
+client/public/*.js
+client/public/*.js.map
+.vscode/
+dev-log.log

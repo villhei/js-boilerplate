@@ -1,0 +1,50 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "standard",
+    "standard-react",
+    "plugin:flowtype/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "globals": {
+    "React": true,
+    "T": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "allowImportExportEverywhere": false,
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": "warn",
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any"
+      }
+    ],
+    "no-multi-spaces": "off",
+    "no-multiple-empty-lines": "off",
+    "no-debugger": "warn",
+    "no-duplicate-imports": "off",
+    "require-yield": "warn",
+    "space-before-function-paren": "off",
+    "no-unused-expressions": "warn",
+    "no-unused-vars": "warn",
+    "import/no-duplicates": 2
+  },
+  "plugins": [
+    "react",
+    "import",
+    "flowtype"
+  ]
+}
