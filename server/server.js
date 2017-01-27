@@ -5,13 +5,13 @@ import bodyParser from 'body-parser'
 import path from 'path'
 import winston from 'winston'
 import expressWinston from 'express-winston'
-
+import { type ServerConfig } from './config/'
 const SERVER_NOT_RUNNING = '*** Server not running'
-const SERVER_SHUTTING_DOWN  = '*** Server shutting down'
+const SERVER_SHUTTING_DOWN = '*** Server shutting down'
 
 const PUBLIC_ASSETS = path.join(__dirname, '../client/public')
 
-async function create(config): Promise<Server> {
+async function create(config: ServerConfig): Promise<express.Server> {
   const app = express()
   app.use(bodyParser.json())
 
@@ -23,7 +23,7 @@ async function create(config): Promise<Server> {
         colorize: true
       }),
       new (winston.transports.File)({
-        filename: 'dev-log.log',
+        filename: config.logFile,
         level: config.logLevel
       })
     ],
@@ -38,12 +38,12 @@ async function create(config): Promise<Server> {
 
   const port: number = 3000
 
-  server: hServer = app.listen(port)
-  winston.info(`Server listening in port ${port}`)
+  const server = app.listen(port)
+  winston.info(`* Server listening in port ${port}`)
   return server
 }
 
-function stop(server: Server): void {
+function destroy(server: express.Server): void {
   if (!server) {
     throw new Error(SERVER_NOT_RUNNING)
   }
@@ -55,6 +55,5 @@ function stop(server: Server): void {
 
 export default {
   create,
-  stop,
-  getServer
+  destroy
 }

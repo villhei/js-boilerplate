@@ -1,5 +1,13 @@
 /* @flow */
 
-export default {
-  logLevel: 'debug'
+export type ServerConfig = {
+  logLevel: 'debug',
+  logFile: string
+
 }
+const serverConfig: ServerConfig = {
+  logLevel: 'debug',
+  logFile: 'dev-log.log'
+}
+
+export default serverConfig

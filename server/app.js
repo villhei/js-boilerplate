@@ -3,4 +3,4 @@
 import server from './server'
 import config from './config'
 
-const app = server.start(config)
+const app = server.create(config)
