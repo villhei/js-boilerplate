@@ -1,0 +1,13 @@
+[libs]
+flow-typed/
+
+[ignore]
+.*/build/*
+
+[options]
+module.file_ext=.styl
+module.file_ext=.js
+module.file_ext=.json
+
+esproposal.export_star_as=enable
+experimental.strict_type_args=false

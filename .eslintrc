@@ -11,10 +11,6 @@
     "es6": true,
     "jest": true
   },
-  "globals": {
-    "React": true,
-    "T": true
-  },
   "parser": "babel-eslint",
   "parserOptions": {
     "allowImportExportEverywhere": false,

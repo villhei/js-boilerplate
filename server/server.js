@@ -6,14 +6,12 @@ import path from 'path'
 import winston from 'winston'
 import expressWinston from 'express-winston'
 
-let server = null
+const SERVER_NOT_RUNNING = '*** Server not running'
+const SERVER_SHUTTING_DOWN  = '*** Server shutting down'
+
 const PUBLIC_ASSETS = path.join(__dirname, '../client/public')
 
-async function start(config): Promise<any> {
-  if (server) {
-    throw new Error('Urapalvelu server already running')
-  }
-
+async function create(config): Promise<Server> {
   const app = express()
   app.use(bodyParser.json())
 
@@ -40,27 +38,23 @@ async function start(config): Promise<any> {
 
   const port: number = 3000
 
-  server = app.listen(port)
+  server: hServer = app.listen(port)
   winston.info(`Server listening in port ${port}`)
-}
-
-function stop(): void {
-  if (!server) {
-    throw new Error('Server not running')
-  }
-
-  winston.info('Shutting down server')
-
-  server.close()
-  server = null
-}
-
-function getServer() {
   return server
 }
 
+function stop(server: Server): void {
+  if (!server) {
+    throw new Error(SERVER_NOT_RUNNING)
+  }
+
+  winston.info(SERVER_SHUTTING_DOWN)
+
+  return server.close()
+}
+
 export default {
-  start,
+  create,
   stop,
   getServer
 }
