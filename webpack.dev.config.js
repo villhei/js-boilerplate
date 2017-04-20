@@ -18,25 +18,32 @@ export default {
     publicPath: ''
   },
   module: {
-    preLoaders: [
-      { test: /\.json$/, loader: 'json' }
-    ],
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loaders: ['babel'],
-        include: [path.join(__dirname, 'client'), path.join(__dirname, 'server')]
+        include: /(client|server)/,
+        use: 'babel-loader'
       },
       {
-        test: /\.styl$/,
-        loader: 'style-loader!css-loader!stylus-loader?resolve url',
-        include: path.join(__dirname, 'client')
+        test: /\.svg/,
+        use: 'svg-url-loader'
       },
       {
-        test: /\.svg/, loader: 'svg-url-loader'
+        test: /\.(styl|css)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'stylus-loader?resolve url'
+        ]
       },
-      { test: /\.(woff|woff2|eot|ttf)$/,
-        loader: 'url-loader?limit=100000'
+      {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        loader: 'file-loader'
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        loader: 'file-loader'
       }
     ]
   },
