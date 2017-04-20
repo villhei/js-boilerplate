@@ -22,7 +22,12 @@ export default {
       {
         test: /\.js$/,
         include: /(client|server)/,
-        use: 'babel-loader'
+        loader: 'babel-loader',
+        options: {
+          babelrc: false,
+          presets: ['es2015', 'stage-2', 'react'],
+          plugins: ['transform-flow-strip-types']
+        }
       },
       {
         test: /\.svg/,
@@ -30,6 +35,7 @@ export default {
       },
       {
         test: /\.(styl|css)$/,
+        include: /client/,
         use: [
           'style-loader',
           'css-loader',
