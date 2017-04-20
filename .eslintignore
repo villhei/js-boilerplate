@@ -4,5 +4,6 @@ apidoc/
 coverage/
 .idea/
 .git/
+build/
 server/test/mock-data/
 flow-typed/

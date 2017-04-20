@@ -12,7 +12,10 @@
   },
   "main": "server/server.js",
   "scripts": {
-    "build-client": "babel-node ./node_modules/webpack/bin/webpack --config webpack.dev.config",
+    "clean": "rm -rf build",
+    "build": "npm run build:server && npm run build:client",
+    "build:server": "NODE_ENV=production babel server -d build/server --copy-files --ignore *.test.js,*.mock.js",
+    "build:client": "NOE_ENV=production babel-node ./node_modules/webpack/bin/webpack --config webpack.prod.config",
     "watch-client": "babel-node ./node_modules/webpack/bin/webpack --watch --config webpack.dev.config",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint --config .eslintrc .",
@@ -46,6 +49,7 @@
     "eslint-plugin-flowtype": "^2.25.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.4.1",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.9.0",
     "flow-bin": "^0.34.0",
     "flow-typed": "^2.0.0",
@@ -53,6 +57,8 @@
     "json-loader": "^0.5.4",
     "nock": "^9.0.2",
     "nodemon": "^1.11.0",
+    "optimize-css-assets-webpack-plugin": "^1.3.1",
+    "postcss-loader": "^1.3.3",
     "standard": "^8.4.0",
     "standard-react": "^4.0.0",
     "style-loader": "^0.13.1",
@@ -61,6 +67,6 @@
     "supertest": "^2.0.1",
     "svg-url-loader": "^1.1.0",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.2"
+    "webpack": "^2.3.3"
   }
 }
