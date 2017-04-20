@@ -2,6 +2,7 @@ import path from 'path'
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 const definePlugin = new webpack.DefinePlugin({
   'process.env': {
@@ -15,9 +16,9 @@ export default {
     './client/src/index'
   ],
   output: {
-    path: path.join(__dirname, './build/client/public/'),
+    path: path.join(__dirname, './build/client/public'),
     filename: 'bundle.js',
-    publicPath: ''
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -59,6 +60,15 @@ export default {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new ExtractTextPlugin('styles.css'),
-    new OptimizeCssAssetsPlugin()
+    new OptimizeCssAssetsPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: 'client/public/index.html'
+      },
+      {
+        from: 'client/public/images/favicon.ico',
+        to: 'images/[name].[ext]'
+      }
+    ])
   ]
 }
